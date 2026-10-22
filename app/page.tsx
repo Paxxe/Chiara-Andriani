@@ -379,7 +379,7 @@ export default function Home() {
         </section>
 
         {/* CONTATTI */}
-        <section id="contatti" className="px-5 pb-24 sm:px-8 sm:pb-32">
+        <section id="contatti" className="px-5 py-24 sm:px-8 sm:py-32">
           <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-12">
             <Reveal className="lg:col-span-5">
               <div className="flex h-full flex-col justify-between rounded-[2rem] bg-ink p-10 text-cream sm:p-12">
