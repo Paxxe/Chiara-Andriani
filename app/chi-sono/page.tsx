@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Image from "next/image";
 import { Cta } from "@/components/cta";
 import { Reveal, SplitReveal } from "@/components/reveal";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Chi sono",
+export const metadata: Metadata = pageMeta({
+  title: "Chi sono — Psicologa a Bologna",
   description:
-    "Il percorso della Dott.ssa Chiara Andriani: laurea in Neuropsicologia, specializzazione in Psicoterapia presso Studi Cognitivi, oggi libera professionista a Bologna.",
-};
+    "Dott.ssa Chiara Andriani, psicologa e psicoterapeuta cognitivo-comportamentale a Bologna. Laurea in Neuropsicologia, specializzazione presso Studi Cognitivi, iscritta all'Ordine degli Psicologi dell'Emilia-Romagna n. 8939.",
+  path: "/chi-sono",
+});
 
 const percorso = [
   {

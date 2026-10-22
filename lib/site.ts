@@ -1,10 +1,14 @@
 // Dati del sito in un unico punto: modifica qui contatti e informazioni legali.
 export const site = {
+  // TODO: aggiornare quando c'è il dominio definitivo (o impostare NEXT_PUBLIC_SITE_URL su Vercel)
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://chiaraandriani.vercel.app").replace(/\/$/, ""),
   name: "Chiara Andriani",
   role: "Psicologa · Psicoterapeuta",
   specialization: "Psicoterapeuta Cognitivo-Comportamentale",
   city: "Bologna",
   address: "Via Toscana, 64 — 40141 Bologna",
+  street: "Via Toscana, 64",
+  postalCode: "40141",
   mapsQuery: "via Toscana 64, Bologna",
   phone: "+39 327 011 3153",
   email: "chiara_andriani@yahoo.com",

@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import { ContactForm } from "@/components/contact-form";
 import { Reveal, SplitReveal } from "@/components/reveal";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contatti",
+export const metadata: Metadata = pageMeta({
+  title: "Contatti — Psicologa a Bologna, via Toscana 64",
   description:
-    "Contatta la Dott.ssa Chiara Andriani, psicologa e psicoterapeuta a Bologna, per fissare un primo colloquio conoscitivo in studio oppure online.",
-};
+    "Contatta la Dott.ssa Chiara Andriani, psicologa e psicoterapeuta a Bologna (via Toscana 64), per fissare un primo colloquio conoscitivo in studio oppure online. Tel. 327 011 3153.",
+  path: "/contatti",
+});
 
 export default function Contatti() {
   return (

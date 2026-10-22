@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Image from "next/image";
 import { Cta } from "@/components/cta";
 import { Reveal, SplitReveal } from "@/components/reveal";
 import { ScrollWords } from "@/components/scroll-words";
 
-export const metadata: Metadata = {
-  title: "Consulenza online",
+export const metadata: Metadata = pageMeta({
+  title: "Psicologa online in videochiamata",
   description:
-    "Colloqui psicologici e psicoterapia online in videochiamata con la Dott.ssa Chiara Andriani, con le stesse modalità e la stessa professionalità degli incontri in studio.",
-};
+    "Psicologo online: colloqui psicologici e psicoterapia in videochiamata con la Dott.ssa Chiara Andriani, psicoterapeuta di Bologna, con le stesse modalità e la stessa professionalità degli incontri in studio.",
+  path: "/consulenza-online",
+});
 
 const passi = [
   { title: "Contattami", text: "Scrivimi o chiamami per concordare un primo colloquio." },

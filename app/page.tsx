@@ -1,8 +1,53 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+import { JsonLd } from "@/components/json-ld";
 import { Parallax } from "@/components/parallax";
 import { Reveal, SplitReveal } from "@/components/reveal";
 import { ScrollWords } from "@/components/scroll-words";
+import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
+
+export const metadata: Metadata = pageMeta({
+  title: "Psicologa e Psicoterapeuta a Bologna | Dott.ssa Chiara Andriani",
+  absoluteTitle: true,
+  description:
+    "Cerchi uno psicologo a Bologna? La Dott.ssa Chiara Andriani, psicologa e psicoterapeuta cognitivo-comportamentale, offre colloqui di sostegno e psicoterapia per ansia, attacchi di panico, depressione e disturbi dell'umore, in studio e online.",
+  path: "/",
+});
+
+// TODO: risposte da far validare a Chiara
+const faq = [
+  {
+    q: "Qual è la differenza tra psicologo e psicoterapeuta?",
+    a: "Lo psicologo è laureato in Psicologia e iscritto all'Albo: può svolgere colloqui di sostegno, consulenza e valutazione. Lo psicoterapeuta ha conseguito in più una specializzazione quadriennale in psicoterapia, che gli consente di curare i disturbi psicologici. Sono sia psicologa sia psicoterapeuta cognitivo-comportamentale.",
+  },
+  {
+    q: "Serve la prescrizione del medico per prenotare un colloquio?",
+    a: "No, non serve alcuna prescrizione: puoi contattarmi direttamente per fissare un primo colloquio conoscitivo, nel mio studio di Bologna oppure online.",
+  },
+  {
+    q: "Come si svolge il primo colloquio?",
+    a: "Il primo incontro serve a conoscerci: mi racconti cosa ti ha portato a cercare uno psicologo e insieme valutiamo se e come impostare un percorso, nei tempi e nei modi adatti alle tue esigenze.",
+  },
+  {
+    q: "Le sedute dallo psicologo sono detraibili?",
+    a: "Sì, le prestazioni di psicologi e psicoterapeuti sono spese sanitarie detraibili nella dichiarazione dei redditi, se pagate con metodi tracciabili e con regolare fattura.",
+  },
+  {
+    q: "La terapia online funziona come quella in studio?",
+    a: "Gli interventi online seguono le stesse modalità e la stessa professionalità di quelli in presenza, e sono particolarmente indicati per chi, per ragioni di salute, non riesce a raggiungere lo studio.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
 
 const aree = [
   { title: "Ansia", text: "Preoccupazioni costanti, attacchi di panico, tensione che non lascia spazio alla serenità." },
@@ -30,18 +75,19 @@ export default function Home() {
 
           <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-10">
             <div className="lg:col-span-7">
-              <Reveal>
-                <p className="mb-8 inline-flex items-center gap-3 text-xs tracking-[0.25em] text-muted uppercase">
+              <h1>
+                <Reveal as="span" className="mb-8 flex items-center gap-3 text-xs tracking-[0.25em] text-muted uppercase">
                   <span className="h-px w-10 bg-clay" />
-                  Psicologa a {site.city}
-                </p>
-              </Reveal>
-              <SplitReveal
-                as="h1"
-                text="Chiara Andriani"
-                delay={150}
-                className="font-serif text-[clamp(3.2rem,9vw,7.5rem)] leading-[0.95] font-light tracking-[-0.03em] [&_.split-word:last-child>span]:pr-[0.1em] [&_.split-word:last-child>span]:text-clay-deep [&_.split-word:last-child>span]:italic"
-              />
+                  Psicologa e Psicoterapeuta a {site.city}
+                  <span className="sr-only"> — </span>
+                </Reveal>
+                <SplitReveal
+                  as="span"
+                  text="Chiara Andriani"
+                  delay={150}
+                  className="block font-serif text-[clamp(3.2rem,9vw,7.5rem)] leading-[0.95] font-light tracking-[-0.03em] [&_.split-word:last-of-type>span]:pr-[0.1em] [&_.split-word:last-of-type>span]:text-clay-deep [&_.split-word:last-of-type>span]:italic"
+                />
+              </h1>
               <Reveal delay={500}>
                 <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">
                   {site.specialization}. Uno spazio sicuro in cui fermarsi, ascoltarsi e ritrovare il proprio{" "}
@@ -71,19 +117,13 @@ export default function Home() {
                 <Parallax speed={0.08} className="scale-110">
                   <Image
                     src="/images/studio-orizzontale.jpg"
-                    alt="Un colloquio in studio"
+                    alt="Colloquio psicologico nello studio della Dott.ssa Chiara Andriani a Bologna"
                     width={1636}
                     height={876}
                     priority
                     className="aspect-[4/5] w-full object-cover object-[30%_50%]"
                   />
                 </Parallax>
-              </Reveal>
-              <Reveal delay={900} className="absolute -bottom-6 -left-4 sm:-left-10">
-                <div className="rounded-2xl bg-clay px-6 py-5 text-white shadow-[0_20px_60px_-20px_rgba(168,122,98,0.7)]">
-                  <p className="font-serif text-2xl">In presenza</p>
-                  <p className="text-sm tracking-wide text-white/85">e online</p>
-                </div>
               </Reveal>
             </div>
           </div>
@@ -201,7 +241,8 @@ export default function Home() {
               </div>
               <Reveal delay={200}>
                 <p className="max-w-md text-lg text-muted">
-                  Colloqui di sostegno psicologico e percorsi di psicoterapia cognitivo-comportamentale, individuali.
+                  Colloqui di sostegno psicologico e percorsi individuali di psicoterapia cognitivo-comportamentale a{" "}
+                  {site.city} e online.
                 </p>
               </Reveal>
             </div>
@@ -272,7 +313,10 @@ export default function Home() {
                 className="font-serif text-[clamp(2.4rem,5vw,4rem)] leading-[1.02] font-light tracking-[-0.02em]"
               />
               <Reveal delay={200}>
-                <p className="mt-6 text-lg text-muted">Sono disponibile a effettuare colloqui in presenza e online.</p>
+                <p className="mt-6 text-lg text-muted">
+                  Sono disponibile a effettuare colloqui in presenza, nel mio studio di psicologia a {site.city}, e
+                  online in videochiamata.
+                </p>
               </Reveal>
             </div>
 
@@ -299,6 +343,37 @@ export default function Home() {
                   </a>
                 </div>
               </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* DOMANDE FREQUENTI */}
+        <section className="bg-sand/60 px-5 py-24 sm:px-8 sm:py-32">
+          <JsonLd data={faqSchema} />
+          <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <Reveal>
+                <p className="mb-6 text-xs tracking-[0.25em] text-clay-deep uppercase">Domande frequenti</p>
+              </Reveal>
+              <SplitReveal
+                text="Andare dallo psicologo a Bologna"
+                className="font-serif text-[clamp(2.2rem,4.4vw,3.6rem)] leading-[1.05] font-light tracking-[-0.02em]"
+              />
+            </div>
+            <div className="divide-y divide-ink/15 border-y border-ink/15 lg:col-span-7 lg:col-start-6">
+              {faq.map((item, i) => (
+                <Reveal key={item.q} delay={i * 60}>
+                  <details className="group py-6">
+                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 font-serif text-xl sm:text-2xl [&::-webkit-details-marker]:hidden">
+                      <h3>{item.q}</h3>
+                      <span className="mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink/20 text-lg transition-transform duration-300 group-open:rotate-45">
+                        +
+                      </span>
+                    </summary>
+                    <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">{item.a}</p>
+                  </details>
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>

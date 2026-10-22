@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Jost } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { businessSchema, JsonLd } from "@/components/json-ld";
+import { site } from "@/lib/site";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -18,28 +20,28 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
-    default: "Chiara Andriani — Psicologa e Psicoterapeuta a Bologna",
-    template: "%s — Chiara Andriani, Psicologa a Bologna",
+    default: "Psicologa e Psicoterapeuta a Bologna | Dott.ssa Chiara Andriani",
+    template: "%s | Dott.ssa Chiara Andriani",
   },
   description:
-    "Dott.ssa Chiara Andriani, psicologa e psicoterapeuta cognitivo-comportamentale a Bologna. Colloqui di sostegno e terapia per ansia, depressione e disturbi dell'umore, in presenza e online.",
-  openGraph: {
-    title: "Chiara Andriani — Psicologa e Psicoterapeuta",
-    description: "Colloqui di sostegno e psicoterapia a Bologna e online.",
-    locale: "it_IT",
-    type: "website",
-  },
+    "Psicologa e psicoterapeuta cognitivo-comportamentale a Bologna. La Dott.ssa Chiara Andriani offre colloqui di sostegno e psicoterapia per ansia, attacchi di panico, depressione e disturbi dell'umore, in studio e online.",
+  applicationName: "Chiara Andriani Psicologa",
+  authors: [{ name: "Dott.ssa Chiara Andriani" }],
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
+  formatDetection: { telephone: true, email: true, address: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f6f2eb",
+  themeColor: "#efe4d5",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it" className={`${fraunces.variable} ${jost.variable}`}>
       <body>
+        <JsonLd data={businessSchema} />
         <Header />
         {children}
         <Footer />

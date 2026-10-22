@@ -39,13 +39,12 @@ export function ScrollWords({ text, className = "" }: { text: string; className?
 
   const words = text.split(" ");
   return (
-    <p ref={ref} aria-label={text} className={className}>
+    <p ref={ref} className={className}>
       {words.map((word, i) => {
         const local = Math.min(1, Math.max(0, progress * words.length - i));
         return (
           <span
             key={i}
-            aria-hidden
             className="transition-opacity duration-300"
             style={{ opacity: 0.18 + 0.82 * local }}
           >

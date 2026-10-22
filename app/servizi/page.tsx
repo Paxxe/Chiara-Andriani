@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import { Cta } from "@/components/cta";
 import { Reveal, SplitReveal } from "@/components/reveal";
 import { ScrollWords } from "@/components/scroll-words";
 
-export const metadata: Metadata = {
-  title: "Servizi",
+export const metadata: Metadata = pageMeta({
+  title: "Psicoterapia a Bologna: ansia, panico, depressione",
   description:
-    "Psicoterapia cognitivo-comportamentale a Bologna e online: disturbi d'ansia, attacchi di panico, disturbi ossessivo-compulsivi, depressione, disturbi alimentari, stress e gestione delle emozioni.",
-};
+    "Psicoterapia cognitivo-comportamentale a Bologna e online: disturbi d'ansia, attacchi di panico e agorafobia, disturbo ossessivo-compulsivo, depressione, disturbi alimentari, stress e gestione delle emozioni.",
+  path: "/servizi",
+});
 
 const abc = [
   { letter: "A", title: "Evento", text: "Ciò che accade, fuori o dentro di noi." },
@@ -43,7 +45,7 @@ export default function Servizi() {
           </Reveal>
           <SplitReveal
             as="h1"
-            text="Psicoterapia cognitivo-comportamentale"
+            text="Psicoterapia cognitivo-comportamentale a Bologna"
             delay={150}
             className="max-w-5xl font-serif text-[clamp(2.6rem,7vw,6rem)] leading-[0.98] font-light tracking-[-0.03em]"
           />

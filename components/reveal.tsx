@@ -45,14 +45,9 @@ export function SplitReveal({ text, as: Tag = "h2", delay = 0, className = "" }:
   const { ref, inView } = useInView<HTMLElement>();
   const words = text.split(" ");
   return (
-    <Tag
-      ref={ref}
-      aria-label={text}
-      className={`${inView ? "is-in" : ""} ${className}`}
-      style={{ "--d": `${delay}ms` } as CSSProperties}
-    >
+    <Tag ref={ref} className={`${inView ? "is-in" : ""} ${className}`} style={{ "--d": `${delay}ms` } as CSSProperties}>
       {words.map((word, i) => (
-        <span key={i} aria-hidden className="split-word">
+        <span key={i} className="split-word">
           <span style={{ "--i": i } as CSSProperties}>{word}</span>
           {i < words.length - 1 && " "}
         </span>
