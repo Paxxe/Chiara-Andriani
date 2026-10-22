@@ -7,7 +7,7 @@ export function Parallax({ children, speed = 0.12, className = "" }: { children:
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce), (max-width: 767px)").matches) return;
     let frame = 0;
     const update = () => {
       frame = 0;
