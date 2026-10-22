@@ -1,7 +1,7 @@
 // Dati del sito in un unico punto: modifica qui contatti e informazioni legali.
 export const site = {
-  // TODO: aggiornare quando c'è il dominio definitivo (o impostare NEXT_PUBLIC_SITE_URL su Vercel)
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://chiaraandriani.vercel.app").replace(/\/$/, ""),
+  // Dominio principale (sovrascrivibile con NEXT_PUBLIC_SITE_URL)
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://andrianichiara.it").replace(/\/$/, ""),
   name: "Chiara Andriani",
   role: "Psicologa · Psicoterapeuta",
   specialization: "Psicoterapeuta Cognitivo-Comportamentale",

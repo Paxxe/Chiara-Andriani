@@ -16,23 +16,24 @@ export function ContactForm() {
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
-    const key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
-    if (!key) {
-      console.error("NEXT_PUBLIC_WEB3FORMS_KEY non configurata");
-      setStatus("error");
-      return;
-    }
-
     setStatus("sending");
     const data = new FormData(form);
-    data.append("access_key", key);
-    data.append("from_name", `Sito ${site.name}`);
-    data.set("subject", `Nuovo messaggio dal sito: ${data.get("oggetto") || "senza oggetto"}`);
+    const payload = {
+      nome: data.get("nome"),
+      email: data.get("email"),
+      oggetto: data.get("oggetto"),
+      messaggio: data.get("messaggio"),
+      privacy: data.get("privacy") === "on",
+      botcheck: data.get("botcheck") === "on",
+    };
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: data });
-      const json = await res.json();
-      if (!json.success) throw new Error(json.message);
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       form.reset();
       setStatus("success");
     } catch (err) {
